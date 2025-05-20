@@ -2,15 +2,16 @@
 
 Model Documentation — This document explains the models, regression techniques, and performance optimizations used in the project, based directly on the codebase.
 
-Model Selection and Parameters Component Model Type Parameters Used Fee Model Tiered percentage model Static fee rates: 0.10%, 0.07%, 0.05% Slippage Model Linear regression Trained using historical quantity/slippage Market Impact Simplified Almgren-Chriss Uses volatility, quantity, and time horizon
+Model Selection and Parameters Component, Model Type, Parameters Used Fee Model Tiered percentage model Static fee rates: 0.10%, 0.07%, 0.05%, Slippage Model Linear regression, Trained using historical quantity/slippage, Market Impact, Simplified Almgren-Chriss. Uses volatility, quantity, and time horizon.
 
 Slippage Model – Linear Regression Location: SlippageModel.cpp
 
 Training Function:
 
-cpp Copy Edit slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX); intercept = (sumY - slope * sumX) / n; This is standard Ordinary Least Squares (OLS) regression for predicting slippage based on quantity:
+slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX); intercept = (sumY - slope * sumX) / n; This is standard Ordinary Least Squares (OLS) regression for predicting slippage based on quantity:
 
-slippage(Q)=slope⋅Q+intercept Q: Order quantity
+slippage(Q)=slope⋅Q+intercept 
+Q: Order quantity
 
 slope, intercept: Fitted using past trade data
 
@@ -44,15 +45,14 @@ return volatility * std::sqrt(quantity / timeHorizon); Mathematical Form:
 
 slippage(Q)=slope⋅Q+intercept​
 
-​
 
 Where:
 
-𝜎 σ: Market volatility (passed as parameter)
+𝜎: Market volatility (passed as parameter)
 
-𝑄 Q: Order quantity
+𝑄: Order quantity
 
-𝑇 T: Time horizon over which execution occurs
+𝑇: Time horizon over which execution occurs
 
 This simplified form of the Almgren-Chriss model estimates the temporary market impact of executing a trade. It reflects that larger and quicker trades result in higher impact.
 
