@@ -50,16 +50,16 @@ The system provides actionable insights for traders aiming to optimize execution
 |    - Provides input parameters for simulation       |
 +-----------------------------^-----------------------+
                               |
-                       WebSocket Stream (JSON)
+                  WebSocket Stream (JSON)
                               |
 +-----------------------------v-----------------------+
 |                Backend Trade Estimator               |
 |  - WebSocket Client (Boost Beast with SSL)           |
 |  - JSON Orderbook Parser (Boost.JSON)                |
 |  - Statistical Models: Linear Regression, Logistic   |
-|    Regression, Almgren-Chriss Model                   |
-|  - Trade Cost Calculation Module                      |
-|  - Latency Measurement                                |
+|    Regression, Almgren-Chriss Model                  |
+|  - Trade Cost Calculation Module                     |
+|  - Latency Measurement                               |
 +-----------------------------------------------------+
 ```
 
@@ -151,8 +151,9 @@ Secure WebSocket client implementation connects to OKX’s L2 orderbook endpoint
 
 ---
 
-## Setup and Installation (C++)
+## Setup and Installation
 
+### C++
 1. **Prerequisites**:
 
    * Boost 1.75+ with Beast and JSON modules
@@ -167,47 +168,15 @@ Secure WebSocket client implementation connects to OKX’s L2 orderbook endpoint
    ```
 
    ```bash
-   cmake ..
-   make
+   cmake .. -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake
+   cmake --build .
    ```
 
 3. **Run**:
 
    ```bash
-   ./GoQuant
+   ./TradeSimulator
    ```
-
----
-
----
-
-## Setup and Installation (Frontend)
-
-1. **Prerequisites**:
-
-   * Nodejs (LTS version)
-
-2. **Run**:
-    ```bash
-   cd ui
-   npm install
-   ```
-
-   ```bash
-   npm run dev
-   ```
-
----
-
----
-
-## Check WebSocket Response
-
-  ```bash
-  g++ websocket2.cpp -o websocket2 -lboost_system -lssl -lcrypto -lpthread -lboost_json
-  ./websocket2
-  ```
-
 
 ---
 
