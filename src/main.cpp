@@ -3,7 +3,6 @@
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 #include <iostream>
-#include <winsock2.h>
 #pragma comment(lib, "Ws2_32.lib")  
 #include "ui/InputPanel.h"
 #include "ui/OutputPanel.h"
@@ -14,13 +13,6 @@
 #include "models/WebSocketClient.h"
 
 int main() {
-    // Initialize Winsock (needed on Windows before using sockets)
-    WSADATA wsaData;
-    if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
-        std::cerr << "WSAStartup failed\n";
-        return -1;
-    }
-
     // Initialize GLFW
     if (!glfwInit()) return -1;
 
@@ -96,7 +88,6 @@ int main() {
     ImGui::DestroyContext();
     glfwDestroyWindow(window);
     glfwTerminate();
-    WSACleanup();
 
     return 0;
 }

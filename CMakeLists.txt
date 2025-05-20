@@ -32,13 +32,19 @@ set(SRC_FILES src/main.cpp ${MODEL_SRC} ${UI_SRC} ${BACKEND_SRC})
 add_executable(TradeSimulator ${SRC_FILES})
 
 # Link libraries
-# target_link_libraries(TradeSimulator PRIVATE bcrypt.lib)
+target_link_libraries(TradeSimulator PRIVATE 
+    glfw
+    OpenGL::GL
+    nlohmann_json::nlohmann_json
+    ixwebsocket::ixwebsocket
+    imgui::imgui
+)
 
 # Include directories
 target_include_directories(TradeSimulator PRIVATE
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/src/ui
-    ${CMAKE_SOURCE_DIR}/src/ui/backends
+    ${CMAKE_SOURCE_DIR}/src/ui/backend
 )
 
 # Optional: Show source groups in Visual Studio
